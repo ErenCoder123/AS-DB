@@ -84,49 +84,49 @@ Relatório
 
 Objetivo
 
-1
+Relatório - 1
 
 Faturamento por Status
 
 Visão de caixa realizado vs. a receber.
 
-2
+Relatório - 2
 
 Receita por Tipo de Cliente
 
 Comparativo Mensalista vs. Avulso.
 
-3
+Relatório - 3
 
 Ocupação por Andar
 
 Identificar zonas mais utilizadas (Logística).
 
-4
+Relatório - 4
 
 Produtividade Operacional
 
 Ranking de atendimentos por funcionário.
 
-5
+Relatório - 5
 
 Tempo Médio de Permanência
 
 Métricas para ajuste de tarifação.
 
-6
+Relatório - 6
 
 Top 3 Clientes VIP
 
 Identificação de clientes para fidelização.
 
-7
+Relatório - 7
 
 Faturamento por Veículo
 
 Análise de receita Carro vs. Moto.
 
-8
+Relatório - 8
 
 Histórico Diário
 
