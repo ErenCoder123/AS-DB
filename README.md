@@ -54,45 +54,6 @@ Embedada (Denormalized): Para veiculos dentro de clientes (acesso rápido e alta
 
 Referência (Normalized): Para tickets, garantindo integridade e evitando duplicidade de dados em alta cardinalidade.
 
-Diagrama ER (Lógico)
-
-erDiagram
-    CLIENTE ||--|{ TICKET : "gera"
-    CLIENTE ||--|{ VEICULO : "possui (embed)"
-    FUNCIONARIO ||--|{ TICKET : "registra"
-    VAGA ||--|{ TICKET : "é ocupada por"
-    TABELA_PRECO ||--|{ TICKET : "tarifado por"
-
-    CLIENTE {
-        ObjectId _id
-        string nome
-        string cpf
-        string tipo
-        array veiculos
-    }
-    VEICULO {
-        string placa
-        string modelo
-        string cor
-    }
-    VAGA {
-        ObjectId _id
-        string codigo
-        string andar
-        string status
-    }
-    TICKET {
-        ObjectId _id
-        ObjectId clienteId
-        ObjectId vagaId
-        ObjectId operadorEntradaId
-        Date dataEntrada
-        Date dataSaida
-        Number valorTotal
-        string status
-    }
-
-
 🚀 Como Executar
 
 Este projeto contém scripts para execução direta no MongoDB Shell (mongosh) ou no terminal integrado do MongoDB Compass.
