@@ -1,106 +1,60 @@
-Documentação do Projeto: ParkFlow - Sistema de Gestão de Estacionamento
+🚗 ParkFlow - Sistema de Gestão de Estacionamentos
 
-1. Nome do Projeto e Descrição
+Gerenciamento inteligente, seguro e eficiente para estacionamentos comerciais.
 
-Nome do Sistema: ParkFlow
-Descrição: O ParkFlow é um sistema de gerenciamento para estacionamentos comerciais.
-Problema/Objetivo: Resolve a dificuldade de controle manual de entrada e saída de veículos, cálculo de permanência, gestão financeira e controle de ocupação de vagas em diferentes andares. O objetivo é automatizar a tarifação, garantir a segurança (sabendo quem entrou e saiu) e fornecer inteligência de negócio sobre a ocupação e faturamento.
+📋 Sobre o Projeto
 
-2. Propósito do Banco de Dados
+O ParkFlow é uma solução desenvolvida para resolver a dificuldade de controle manual de entrada e saída de veículos, cálculo de permanência e gestão financeira de estacionamentos.
 
-O banco de dados DatabaseAS (MongoDB) serve como o repositório central de informações do sistema. Ele armazena dados cadastrais de clientes e funcionários, o inventário de vagas (físico) e, principalmente, o registro transacional de todas as operações (tickets de estacionamento). Ele é essencial para persistir o histórico financeiro e permitir análises de desempenho.
+O sistema visa automatizar a tarifação, garantir a segurança e fornecer inteligência de negócio (BI) através de relatórios de ocupação e faturamento.
 
-3. Definição das Collections
+🗂️ Estrutura do Banco de Dados (DatabaseAS)
 
-A. clientes
+O banco de dados utiliza o MongoDB para garantir flexibilidade e performance nas transações. Abaixo, a definição das coleções principais.
 
-Propósito: Armazenar dados de quem utiliza o estacionamento, diferenciando mensalistas de avulsos.
+1. clientes 👤
 
-Campos Principais:
+Armazena os dados dos usuários, diferenciando mensalistas de avulsos.
 
-nome (String): Nome completo.
+Relacionamento: Possui documentos embarcados (Embedded) para veículos.
 
-cpf (String): Identificador único.
+Campos: nome, cpf, tipo, veiculos (Array: placa, modelo, cor).
 
-tipo (String): "Mensalista" ou "Avulso".
+2. vagas 🅿️
 
-Campo Aninhado (Subdocumento):
+Representa o inventário físico do estacionamento.
 
-veiculos (Array de Objetos): Contém placa, modelo e cor. Justificativa: Um cliente pode ter mais de um carro, e esses dados pertencem estritamente ao cliente.
+Campos: codigo (ex: G1-01), andar, tipo (Carro/Moto/PCD), status.
 
-B. vagas
+3. funcionarios 👷
 
-Propósito: Mapear o espaço físico do estacionamento.
+Controle de operadores para auditoria de entradas e saídas.
 
-Campos Principais:
+Campos: nome, matricula, cargo, turno.
 
-codigo (String): Ex: "G1-01".
+4. tabela_precos 💲
 
-andar (String): Localização (G1, Térreo, G2).
+Regras de tarifação flexíveis.
 
-tipo (String): Carro, Moto, PCD.
+Campos: nome, regras (valorHora, tolerancia), ativo.
 
-status (String): "Livre" ou "Ocupada".
+5. tickets 🎫
 
-C. funcionarios
+A coleção transacional central do sistema.
 
-Propósito: Controlar quem opera o sistema para fins de auditoria.
+Relacionamento: Referencia clientes, vagas, funcionarios e tabela_precos via ObjectId.
 
-Campos Principais:
+Campos: placaVeiculo, dataEntrada, dataSaida, valorTotal, status.
 
-nome (String).
+📊 Modelagem de Dados
 
-matricula (String).
+O sistema utiliza uma abordagem híbrida:
 
-cargo (String).
+Embedada (Denormalized): Para veiculos dentro de clientes (acesso rápido e alta dependência).
 
-turno (String).
+Referência (Normalized): Para tickets, garantindo integridade e evitando duplicidade de dados em alta cardinalidade.
 
-D. tabela_precos
-
-Propósito: Permitir a flexibilidade de tarifas sem alterar o código fonte.
-
-Campos Principais:
-
-nome (String): Ex: "Padrão 2025".
-
-regras (Objeto - Subdocumento): Contém valorHora, horaAdicional, tolerancia.
-
-ativo (Boolean).
-
-E. tickets
-
-Propósito: A collection principal que registra a transação de estacionamento.
-
-Campos Principais:
-
-placaVeiculo (String): Registro rápido.
-
-dataEntrada / dataSaida (Date).
-
-valorTotal (Decimal/Number).
-
-status (String): "Aberto" ou "Pago".
-
-Referências (Relacionamentos): clienteId, vagaId, operadorEntradaId, tabelaPrecoId.
-
-4. Relacionamentos entre as Collections
-
-O sistema utiliza uma Abordagem Híbrida:
-
-Relacionamento por Referência (Normalized):
-
-A collection tickets se relaciona com clientes, vagas, funcionarios e tabela_precos através de seus _id (ObjectIds).
-
-Justificativa: Alta cardinalidade. Um cliente pode ter centenas de tickets ao longo do tempo. Se embutíssemos os tickets dentro do cliente, o documento ficaria gigante. Além disso, se o nome do funcionário mudar, não queremos duplicar essa alteração em mil tickets passados.
-
-Relacionamento Embedado (Denormalized):
-
-A collection clientes contém veiculos como um array de subdocumentos.
-
-Justificativa: Dados estritamente dependentes. Um veículo raramente existe no sistema sem um dono. Além disso, ao carregar o perfil do cliente na tela, já queremos ver os carros dele imediatamente, sem fazer outra query.
-
-5. Modelagem (Diagrama Lógico Simplificado)
+Diagrama ER (Lógico)
 
 erDiagram
     CLIENTE ||--|{ TICKET : "gera"
@@ -139,38 +93,92 @@ erDiagram
     }
 
 
-7. Definição dos 8 Relatórios Gerenciais
+🚀 Como Executar
 
-Os relatórios foram desenvolvidos utilizando o Aggregation Framework do MongoDB para extrair inteligência dos dados:
+Este projeto contém scripts para execução direta no MongoDB Shell (mongosh) ou no terminal integrado do MongoDB Compass.
 
-Faturamento Total por Status:
+1. Popular o Banco de Dados
 
-Utilidade: Visão financeira imediata. Mostra o caixa realizado (pago) vs. o potencial a receber (aberto).
+Utilize o script popular_database_as.js para criar as coleções e inserir a massa de dados (30 clientes, 30 vagas, tickets e funcionários).
 
-Receita por Tipo de Cliente:
+# No terminal ou Compass
+load("popular_database_as.js")
 
-Utilidade: Estratégia de Marketing. Define se o foco deve ser captar mais mensalistas ou investir no rotativo.
 
-Ocupação por Andar:
+2. Gerar Relatórios
 
-Utilidade: Logística e Manutenção. Identifica zonas mortas ou superlotadas para direcionar o fluxo.
+Utilize o script relatorios_parkflow.js para executar as agregações e visualizar os resultados no console.
 
-Produtividade dos Operadores:
+# No terminal ou Compass
+load("relatorios_parkflow.js")
 
-Utilidade: Gestão de RH. Identifica funcionários com alto desempenho ou necessidade de treinamento.
 
-Tempo Médio de Permanência:
+📈 Relatórios e Análises (Business Intelligence)
 
-Utilidade: Precificação. Ajuda a definir se a primeira hora deve ser mais cara baseada na média de estadia.
+O sistema inclui 8 relatórios estratégicos gerados via Aggregation Framework:
 
-Top 3 Clientes (VIPs):
+#
 
-Utilidade: Fidelização. Identifica quem deixa mais dinheiro na empresa para ações de CRM.
+Relatório
 
-Faturamento por Tipo de Veículo:
+Objetivo
 
-Utilidade: Otimização de Espaço. Se motos geram pouca receita mas ocupam muito espaço, o layout pode ser revisto.
+1
 
-Histórico Diário de Faturamento:
+Faturamento por Status
 
-Utilidade: Análise de Tendência. Permite visualizar sazonalidade e crescimento do negócio ao longo do tempo.
+Visão de caixa realizado vs. a receber.
+
+2
+
+Receita por Tipo de Cliente
+
+Comparativo Mensalista vs. Avulso.
+
+3
+
+Ocupação por Andar
+
+Identificar zonas mais utilizadas (Logística).
+
+4
+
+Produtividade Operacional
+
+Ranking de atendimentos por funcionário.
+
+5
+
+Tempo Médio de Permanência
+
+Métricas para ajuste de tarifação.
+
+6
+
+Top 3 Clientes VIP
+
+Identificação de clientes para fidelização.
+
+7
+
+Faturamento por Veículo
+
+Análise de receita Carro vs. Moto.
+
+8
+
+Histórico Diário
+
+Tendência de faturamento ao longo do tempo.
+
+📁 Arquivos do Repositório
+
+popular_database_as.js: Script de criação e seed (população) do banco.
+
+relatorios_parkflow.js: Script contendo as queries de agregação.
+
+documentacao_parkflow.pdf: Documentação completa do projeto.
+
+✒️ Autor
+
+Desenvolvido como parte da atividade de Banco de Dados NoSQL.
