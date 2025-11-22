@@ -62,25 +62,16 @@ Este projeto contém scripts para execução direta no MongoDB Shell (mongosh) o
 
 Utilize o script popular_database_as.js para criar as coleções e inserir a massa de dados (30 clientes, 30 vagas, tickets e funcionários).
 
-# No terminal ou Compass
-load("popular_database_as.js")
-
-
 2. Gerar Relatórios
 
 Utilize o script relatorios_parkflow.js para executar as agregações e visualizar os resultados no console.
-
-# No terminal ou Compass
-load("script-relatorios.js")
-
 
 📈 Relatórios e Análises (Business Intelligence)
 
 O sistema inclui 8 relatórios estratégicos gerados via Aggregation Framework:
 
-#
 
-Relatório
+Relatórios
 
 Objetivo
 
