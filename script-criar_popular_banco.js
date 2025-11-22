@@ -1,49 +1,73 @@
+/**
+ * SCRIPT DE CRIAÇÃO E POPULAÇÃO - DATABASE: DatabaseAS
+ * * VERSÃO SIMPLIFICADA: Veículo como String
+ * * Como usar no MongoDB Compass:
+ * 1. Abra o terminal integrado (_MONGOSH).
+ * 2. Cole o código.
+ * 3. Pressione Enter.
+ * 4. Dê Refresh nos databases.
+ */
+
+// 1. Selecionar (ou criar) o Banco de Dados 'DatabaseAS'
 const dbAS = db.getSiblingDB('DatabaseAS');
 
 print(`=================================================`);
 print(`INICIANDO OPERAÇÃO NO BANCO: ${dbAS.getName()}`);
 print(`=================================================`);
 
+// 2. Limpar o banco
 dbAS.dropDatabase();
 print("Banco 'DatabaseAS' limpo/resetado com sucesso.");
 
+// ==========================================
+// 3. DEFINIÇÃO E INSERÇÃO DE DADOS
+// ==========================================
+
+// --- COLLECTION: CLIENTES (30 itens) ---
 print("Inserindo 30 Clientes...");
 const clientes = [
-  { _id: ObjectId("650000000000000000000001"), nome: "Carlos Oliveira", cpf: "111.222.333-44", tipo: "Mensalista", veiculos: [{ placa: "ABC-1234", modelo: "Civic", cor: "Prata" }] },
-  { _id: ObjectId("650000000000000000000002"), nome: "Ana Souza", cpf: "222.333.444-55", tipo: "Avulso", veiculos: [{ placa: "DEF-5678", modelo: "HB20", cor: "Branco" }] },
-  { _id: ObjectId("650000000000000000000003"), nome: "Marcos Lima", cpf: "333.444.555-66", tipo: "Mensalista", veiculos: [{ placa: "GHI-9012", modelo: "Corolla", cor: "Preto" }] },
-  { _id: ObjectId("650000000000000000000004"), nome: "Fernanda Costa", cpf: "444.555.666-77", tipo: "Avulso", veiculos: [{ placa: "JKL-3456", modelo: "Fit", cor: "Vermelho" }] },
-  { _id: ObjectId("650000000000000000000005"), nome: "Roberto Santos", cpf: "555.666.777-88", tipo: "Avulso", veiculos: [{ placa: "MNO-7890", modelo: "Gol", cor: "Prata" }] },
-  { _id: ObjectId("650000000000000000000006"), nome: "Julia Pereira", cpf: "666.777.888-99", tipo: "Mensalista", veiculos: [{ placa: "PQR-1234", modelo: "Compass", cor: "Cinza" }] },
-  { _id: ObjectId("650000000000000000000007"), nome: "Lucas Mendes", cpf: "777.888.999-00", tipo: "Avulso", veiculos: [{ placa: "STU-5678", modelo: "Onix", cor: "Laranja" }] },
-  { _id: ObjectId("650000000000000000000008"), nome: "Patricia Alves", cpf: "888.999.000-11", tipo: "Mensalista", veiculos: [{ placa: "VWX-9012", modelo: "Renegade", cor: "Verde" }] },
-  { _id: ObjectId("650000000000000000000009"), nome: "Bruno Rocha", cpf: "999.000.111-22", tipo: "Avulso", veiculos: [{ placa: "YZA-3456", modelo: "Fiesta", cor: "Azul" }] },
-  { _id: ObjectId("650000000000000000000010"), nome: "Carla Dias", cpf: "000.111.222-33", tipo: "Avulso", veiculos: [{ placa: "BCD-7890", modelo: "Kicks", cor: "Branco" }] },
-  { _id: ObjectId("650000000000000000000011"), nome: "Ricardo Gomes", cpf: "123.456.789-00", tipo: "Mensalista", veiculos: [{ placa: "EEE-1111", modelo: "Fusca", cor: "Azul" }] },
-  { _id: ObjectId("650000000000000000000012"), nome: "Mariana Silva", cpf: "234.567.890-11", tipo: "Avulso", veiculos: [{ placa: "FFF-2222", modelo: "Uno", cor: "Prata" }] },
-  { _id: ObjectId("650000000000000000000013"), nome: "Gustavo Henrique", cpf: "345.678.901-22", tipo: "Mensalista", veiculos: [{ placa: "GGG-3333", modelo: "Cruze", cor: "Preto" }] },
-  { _id: ObjectId("650000000000000000000014"), nome: "Larissa Manoela", cpf: "456.789.012-33", tipo: "Avulso", veiculos: [{ placa: "HHH-4444", modelo: "Mobi", cor: "Vermelho" }] },
-  { _id: ObjectId("650000000000000000000015"), nome: "Felipe Neto", cpf: "567.890.123-44", tipo: "Mensalista", veiculos: [{ placa: "III-5555", modelo: "Tracker", cor: "Cinza" }] },
-  { _id: ObjectId("650000000000000000000016"), nome: "Amanda Nunes", cpf: "678.901.234-55", tipo: "Avulso", veiculos: [{ placa: "JJJ-6666", modelo: "Argos", cor: "Branco" }] },
-  { _id: ObjectId("650000000000000000000017"), nome: "Thiago Ventura", cpf: "789.012.345-66", tipo: "Mensalista", veiculos: [{ placa: "KKK-7777", modelo: "T-Cross", cor: "Azul" }] },
-  { _id: ObjectId("650000000000000000000018"), nome: "Bruna Marquezine", cpf: "890.123.456-77", tipo: "Avulso", veiculos: [{ placa: "LLL-8888", modelo: "Nivus", cor: "Cinza" }] },
-  { _id: ObjectId("650000000000000000000019"), nome: "Neymar Jr", cpf: "901.234.567-88", tipo: "Mensalista", veiculos: [{ placa: "MMM-9999", modelo: "Ferrari", cor: "Vermelho" }] },
-  { _id: ObjectId("650000000000000000000020"), nome: "Anitta Machado", cpf: "012.345.678-99", tipo: "Avulso", veiculos: [{ placa: "NNN-0000", modelo: "Lamborghini", cor: "Roxo" }] },
-  { _id: ObjectId("650000000000000000000021"), nome: "Jorge Amado", cpf: "111.111.111-11", tipo: "Mensalista", veiculos: [{ placa: "OOO-1111", modelo: "Fusca", cor: "Amarelo" }] },
-  { _id: ObjectId("650000000000000000000022"), nome: "Clarice Lispector", cpf: "222.222.222-22", tipo: "Avulso", veiculos: [{ placa: "PPP-2222", modelo: "Brasilia", cor: "Azul" }] },
-  { _id: ObjectId("650000000000000000000023"), nome: "Machado de Assis", cpf: "333.333.333-33", tipo: "Mensalista", veiculos: [{ placa: "QQQ-3333", modelo: "Opala", cor: "Preto" }] },
-  { _id: ObjectId("650000000000000000000024"), nome: "Monteiro Lobato", cpf: "444.444.444-44", tipo: "Avulso", veiculos: [{ placa: "RRR-4444", modelo: "Chevette", cor: "Bege" }] },
-  { _id: ObjectId("650000000000000000000025"), nome: "Cecília Meireles", cpf: "555.555.555-55", tipo: "Mensalista", veiculos: [{ placa: "SSS-5555", modelo: "Kombi", cor: "Branco" }] },
-  { _id: ObjectId("650000000000000000000026"), nome: "Vinicius de Moraes", cpf: "666.666.666-66", tipo: "Avulso", veiculos: [{ placa: "TTT-6666", modelo: "Maverick", cor: "Laranja" }] },
-  { _id: ObjectId("650000000000000000000027"), nome: "Tom Jobim", cpf: "777.777.777-77", tipo: "Mensalista", veiculos: [{ placa: "UUU-7777", modelo: "Landau", cor: "Preto" }] },
-  { _id: ObjectId("650000000000000000000028"), nome: "Elis Regina", cpf: "888.888.888-88", tipo: "Avulso", veiculos: [{ placa: "VVV-8888", modelo: "Corcel", cor: "Verde" }] },
-  { _id: ObjectId("650000000000000000000029"), nome: "Tim Maia", cpf: "999.999.999-99", tipo: "Mensalista", veiculos: [{ placa: "XXX-9999", modelo: "Santana", cor: "Vinho" }] },
-  { _id: ObjectId("650000000000000000000030"), nome: "Rita Lee", cpf: "000.000.000-00", tipo: "Avulso", veiculos: [{ placa: "ZZZ-0000", modelo: "Fusca", cor: "Rosa" }] }
+  // -- 10 Primeiros (Usados nos Tickets) --
+  { _id: ObjectId("650000000000000000000001"), nome: "Carlos Oliveira", cpf: "111.222.333-44", tipo: "Mensalista", veiculo: "Civic Prata - ABC-1234" },
+  { _id: ObjectId("650000000000000000000002"), nome: "Ana Souza", cpf: "222.333.444-55", tipo: "Avulso", veiculo: "HB20 Branco - DEF-5678" },
+  { _id: ObjectId("650000000000000000000003"), nome: "Marcos Lima", cpf: "333.444.555-66", tipo: "Mensalista", veiculo: "Corolla Preto - GHI-9012" },
+  { _id: ObjectId("650000000000000000000004"), nome: "Fernanda Costa", cpf: "444.555.666-77", tipo: "Avulso", veiculo: "Fit Vermelho - JKL-3456" },
+  { _id: ObjectId("650000000000000000000005"), nome: "Roberto Santos", cpf: "555.666.777-88", tipo: "Avulso", veiculo: "Gol Prata - MNO-7890" },
+  { _id: ObjectId("650000000000000000000006"), nome: "Julia Pereira", cpf: "666.777.888-99", tipo: "Mensalista", veiculo: "Compass Cinza - PQR-1234" },
+  { _id: ObjectId("650000000000000000000007"), nome: "Lucas Mendes", cpf: "777.888.999-00", tipo: "Avulso", veiculo: "Onix Laranja - STU-5678" },
+  { _id: ObjectId("650000000000000000000008"), nome: "Patricia Alves", cpf: "888.999.000-11", tipo: "Mensalista", veiculo: "Renegade Verde - VWX-9012" },
+  { _id: ObjectId("650000000000000000000009"), nome: "Bruno Rocha", cpf: "999.000.111-22", tipo: "Avulso", veiculo: "Fiesta Azul - YZA-3456" },
+  { _id: ObjectId("650000000000000000000010"), nome: "Carla Dias", cpf: "000.111.222-33", tipo: "Avulso", veiculo: "Kicks Branco - BCD-7890" },
+  
+  // -- Mais 20 Clientes --
+  { _id: ObjectId("650000000000000000000011"), nome: "Ricardo Gomes", cpf: "123.456.789-00", tipo: "Mensalista", veiculo: "Fusca Azul - EEE-1111" },
+  { _id: ObjectId("650000000000000000000012"), nome: "Mariana Silva", cpf: "234.567.890-11", tipo: "Avulso", veiculo: "Uno Prata - FFF-2222" },
+  { _id: ObjectId("650000000000000000000013"), nome: "Gustavo Henrique", cpf: "345.678.901-22", tipo: "Mensalista", veiculo: "Cruze Preto - GGG-3333" },
+  { _id: ObjectId("650000000000000000000014"), nome: "Larissa Manoela", cpf: "456.789.012-33", tipo: "Avulso", veiculo: "Mobi Vermelho - HHH-4444" },
+  { _id: ObjectId("650000000000000000000015"), nome: "Felipe Neto", cpf: "567.890.123-44", tipo: "Mensalista", veiculo: "Tracker Cinza - III-5555" },
+  { _id: ObjectId("650000000000000000000016"), nome: "Amanda Nunes", cpf: "678.901.234-55", tipo: "Avulso", veiculo: "Argos Branco - JJJ-6666" },
+  { _id: ObjectId("650000000000000000000017"), nome: "Thiago Ventura", cpf: "789.012.345-66", tipo: "Mensalista", veiculo: "T-Cross Azul - KKK-7777" },
+  { _id: ObjectId("650000000000000000000018"), nome: "Bruna Marquezine", cpf: "890.123.456-77", tipo: "Avulso", veiculo: "Nivus Cinza - LLL-8888" },
+  { _id: ObjectId("650000000000000000000019"), nome: "Neymar Jr", cpf: "901.234.567-88", tipo: "Mensalista", veiculo: "Ferrari Vermelho - MMM-9999" },
+  { _id: ObjectId("650000000000000000000020"), nome: "Anitta Machado", cpf: "012.345.678-99", tipo: "Avulso", veiculo: "Lamborghini Roxo - NNN-0000" },
+  { _id: ObjectId("650000000000000000000021"), nome: "Jorge Amado", cpf: "111.111.111-11", tipo: "Mensalista", veiculo: "Fusca Amarelo - OOO-1111" },
+  { _id: ObjectId("650000000000000000000022"), nome: "Clarice Lispector", cpf: "222.222.222-22", tipo: "Avulso", veiculo: "Brasilia Azul - PPP-2222" },
+  { _id: ObjectId("650000000000000000000023"), nome: "Machado de Assis", cpf: "333.333.333-33", tipo: "Mensalista", veiculo: "Opala Preto - QQQ-3333" },
+  { _id: ObjectId("650000000000000000000024"), nome: "Monteiro Lobato", cpf: "444.444.444-44", tipo: "Avulso", veiculo: "Chevette Bege - RRR-4444" },
+  { _id: ObjectId("650000000000000000000025"), nome: "Cecília Meireles", cpf: "555.555.555-55", tipo: "Mensalista", veiculo: "Kombi Branco - SSS-5555" },
+  { _id: ObjectId("650000000000000000000026"), nome: "Vinicius de Moraes", cpf: "666.666.666-66", tipo: "Avulso", veiculo: "Maverick Laranja - TTT-6666" },
+  { _id: ObjectId("650000000000000000000027"), nome: "Tom Jobim", cpf: "777.777.777-77", tipo: "Mensalista", veiculo: "Landau Preto - UUU-7777" },
+  { _id: ObjectId("650000000000000000000028"), nome: "Elis Regina", cpf: "888.888.888-88", tipo: "Avulso", veiculo: "Corcel Verde - VVV-8888" },
+  { _id: ObjectId("650000000000000000000029"), nome: "Tim Maia", cpf: "999.999.999-99", tipo: "Mensalista", veiculo: "Santana Vinho - XXX-9999" },
+  { _id: ObjectId("650000000000000000000030"), nome: "Rita Lee", cpf: "000.000.000-00", tipo: "Avulso", veiculo: "Fusca Rosa - ZZZ-0000" }
 ];
 dbAS.clientes.insertMany(clientes);
 
+
+// --- COLLECTION: VAGAS (30 itens) ---
+// IDs movidos para range 101-130 para evitar conflito com clientes
 print("Inserindo 30 Vagas...");
 const vagas = [
+  // G1 (10 vagas)
   { _id: ObjectId("650000000000000000000101"), codigo: "G1-01", andar: "G1", tipo: "Carro", status: "Ocupada" },
   { _id: ObjectId("650000000000000000000102"), codigo: "G1-02", andar: "G1", tipo: "Carro", status: "Livre" },
   { _id: ObjectId("650000000000000000000103"), codigo: "G1-03", andar: "G1", tipo: "Moto", status: "Ocupada" },
@@ -55,6 +79,7 @@ const vagas = [
   { _id: ObjectId("650000000000000000000109"), codigo: "G1-09", andar: "G1", tipo: "PCD", status: "Ocupada" },
   { _id: ObjectId("650000000000000000000110"), codigo: "G1-10", andar: "G1", tipo: "Carro", status: "Livre" },
   
+  // Térreo (10 vagas)
   { _id: ObjectId("650000000000000000000111"), codigo: "T-01", andar: "Térreo", tipo: "Carro", status: "Ocupada" },
   { _id: ObjectId("650000000000000000000112"), codigo: "T-02", andar: "Térreo", tipo: "Carro", status: "Livre" },
   { _id: ObjectId("650000000000000000000113"), codigo: "T-03", andar: "Térreo", tipo: "Moto", status: "Livre" },
@@ -66,6 +91,7 @@ const vagas = [
   { _id: ObjectId("650000000000000000000119"), codigo: "T-09", andar: "Térreo", tipo: "Moto", status: "Livre" },
   { _id: ObjectId("650000000000000000000120"), codigo: "T-10", andar: "Térreo", tipo: "Carro", status: "Ocupada" },
 
+  // G2 (10 vagas)
   { _id: ObjectId("650000000000000000000121"), codigo: "G2-01", andar: "G2", tipo: "Carro", status: "Livre" },
   { _id: ObjectId("650000000000000000000122"), codigo: "G2-02", andar: "G2", tipo: "Carro", status: "Livre" },
   { _id: ObjectId("650000000000000000000123"), codigo: "G2-03", andar: "G2", tipo: "Carro", status: "Livre" },
@@ -79,6 +105,9 @@ const vagas = [
 ];
 dbAS.vagas.insertMany(vagas);
 
+
+// --- COLLECTION: FUNCIONARIOS ---
+// IDs movidos para range 201+
 print("Inserindo Funcionarios...");
 const funcionarios = [
   { _id: ObjectId("650000000000000000000201"), nome: "João Silva", matricula: "OP-01", cargo: "Operador", turno: "Manhã" },
@@ -89,6 +118,9 @@ const funcionarios = [
 ];
 dbAS.funcionarios.insertMany(funcionarios);
 
+
+// --- COLLECTION: TABELA_PRECOS ---
+// ID movido para range 300+
 print("Inserindo Tabelas de Preços...");
 const tabelaPrecos = [
   {
@@ -107,13 +139,15 @@ const tabelaPrecos = [
 dbAS.tabela_precos.insertMany(tabelaPrecos);
 
 
+// --- COLLECTION: TICKETS ---
+// IDs atualizados para refletir as novas referências
 print("Inserindo Tickets (com relacionamentos atualizados)...");
 const tickets = [
   {
     _id: ObjectId("650000000000000000000401"),
-    clienteId: ObjectId("650000000000000000000001"),
-    vagaId: ObjectId("650000000000000000000101"), 
-    operadorEntradaId: ObjectId("650000000000000000000201"), 
+    clienteId: ObjectId("650000000000000000000001"), // Carlos
+    vagaId: ObjectId("650000000000000000000101"), // G1-01 (Antes era ...21, agora ...101)
+    operadorEntradaId: ObjectId("650000000000000000000201"), // João (Antes ...41, agora ...201)
     tabelaPrecoId: ObjectId("650000000000000000000301"),
     placaVeiculo: "ABC-1234",
     dataEntrada: ISODate("2025-11-21T08:00:00Z"),
@@ -160,7 +194,7 @@ const tickets = [
   {
     _id: ObjectId("650000000000000000000405"),
     clienteId: ObjectId("650000000000000000000005"),
-    vagaId: ObjectId("650000000000000000000111"),
+    vagaId: ObjectId("650000000000000000000111"), // T-01
     operadorEntradaId: ObjectId("650000000000000000000204"),
     tabelaPrecoId: ObjectId("650000000000000000000301"),
     placaVeiculo: "MNO-7890",
@@ -208,7 +242,7 @@ const tickets = [
   {
     _id: ObjectId("650000000000000000000409"),
     clienteId: ObjectId("650000000000000000000009"),
-    vagaId: ObjectId("650000000000000000000121"),
+    vagaId: ObjectId("650000000000000000000121"), // G2-01
     operadorEntradaId: ObjectId("650000000000000000000201"),
     tabelaPrecoId: ObjectId("650000000000000000000301"),
     placaVeiculo: "YZA-3456",
