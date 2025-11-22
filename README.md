@@ -71,7 +71,7 @@ load("popular_database_as.js")
 Utilize o script relatorios_parkflow.js para executar as agregações e visualizar os resultados no console.
 
 # No terminal ou Compass
-load("relatorios_parkflow.js")
+load("script-relatorios.js")
 
 
 📈 Relatórios e Análises (Business Intelligence)
@@ -136,5 +136,5 @@ Tendência de faturamento ao longo do tempo.
 
 popular_database_as.js: Script de criação e seed (população) do banco.
 
-relatorios_parkflow.js: Script contendo as queries de agregação.
+script-relatorios.js: Script contendo as queries de agregação.
 
