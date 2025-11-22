@@ -71,9 +71,7 @@ Utilize o script relatorios_parkflow.js para executar as agregações e visualiz
 O sistema inclui 8 relatórios estratégicos gerados via Aggregation Framework:
 
 
-Relatórios
-
-Objetivo
+---- Relatórios ----
 
 Relatório - 1
 
