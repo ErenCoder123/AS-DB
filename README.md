@@ -137,3 +137,43 @@ Tendência de faturamento ao longo do tempo.
 popular_database_as.js: Script de criação e seed (população) do banco.
 
 relatorios_parkflow.js: Script contendo as queries de agregação.
+
+
+
+
+erDiagram
+    CLIENTE ||--|{ TICKET : "gera"
+    CLIENTE ||--|{ VEICULO : "possui (embed)"
+    FUNCIONARIO ||--|{ TICKET : "registra"
+    VAGA ||--|{ TICKET : "é ocupada por"
+    TABELA_PRECO ||--|{ TICKET : "tarifado por"
+
+    CLIENTE {
+        ObjectId _id
+        string nome
+        string cpf
+        string tipo
+        array veiculos
+    }
+    VEICULO {
+        string placa
+        string modelo
+        string cor
+    }
+    VAGA {
+        ObjectId _id
+        string codigo
+        string andar
+        string status
+    }
+    TICKET {
+        ObjectId _id
+        ObjectId clienteId
+        ObjectId vagaId
+        ObjectId operadorEntradaId
+        Date dataEntrada
+        Date dataSaida
+        Number valorTotal
+        string status
+    }
+
