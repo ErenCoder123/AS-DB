@@ -137,9 +137,3 @@ Tendência de faturamento ao longo do tempo.
 popular_database_as.js: Script de criação e seed (população) do banco.
 
 relatorios_parkflow.js: Script contendo as queries de agregação.
-
-documentacao_parkflow.pdf: Documentação completa do projeto.
-
-✒️ Autor
-
-Desenvolvido como parte da atividade de Banco de Dados NoSQL.
