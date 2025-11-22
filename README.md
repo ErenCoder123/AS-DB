@@ -48,11 +48,11 @@ Campos: placaVeiculo, dataEntrada, dataSaida, valorTotal, status.
 
 📊 Modelagem de Dados
 
-O sistema utiliza uma abordagem híbrida:
-
-Embedada (Denormalized): Para veiculos dentro de clientes (acesso rápido e alta dependência).
+O sistema utiliza uma abordagem de Referência:
 
 Referência (Normalized): Para tickets, garantindo integridade e evitando duplicidade de dados em alta cardinalidade.
+
+Utilizamos referência pois estamos familizaridos com a forma, sendo bem similar a bancos SQL.
 
 🚀 Como Executar
 
