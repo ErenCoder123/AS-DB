@@ -4,7 +4,7 @@ Gerenciamento inteligente, seguro e eficiente para estacionamentos comerciais.
 
 📋 Sobre o Projeto
 
-O ParkFlow é uma solução desenvolvida para resolver a dificuldade de controle manual de entrada e saída de veículos, cálculo de permanência e gestão financeira de estacionamentos.
+O PARKING DOS GURIZES é uma solução desenvolvida para resolver a dificuldade de controle manual de entrada e saída de veículos, cálculo de permanência e gestão financeira de estacionamentos.
 
 O sistema visa automatizar a tarifação, garantir a segurança e fornecer inteligência de negócio (BI) através de relatórios de ocupação e faturamento.
 
