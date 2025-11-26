@@ -1,4 +1,4 @@
-🚗 ParkFlow - Sistema de Gestão de Estacionamentos
+PARKING DOS GURIZES - Banco de Dados de Gestão de Estacionamentos
 
 Gerenciamento inteligente, seguro e eficiente para estacionamentos comerciais.
 
