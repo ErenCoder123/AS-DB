@@ -50,9 +50,11 @@ Campos: placaVeiculo, dataEntrada, dataSaida, valorTotal, status.
 
 O sistema utiliza uma abordagem de Referência:
 
-Referência (Normalized): Para tickets, garantindo integridade e evitando duplicidade de dados em alta cardinalidade.
+Referência: Para tickets, garantindo integridade e evitando duplicidade de dados em alta cardinalidade.
 
 Utilizamos referência pois estamos familizaridos com a forma, sendo bem similar a bancos SQL.
+
+Embedding: Para clientes, pois, o carro pertence ao cliente e geralmente acessamos esses dados juntos, evitando buscar desnecessárias.
 
 🚀 Como Executar
 
